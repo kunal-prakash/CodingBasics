@@ -4,17 +4,10 @@ A: `Emmet` is a powerful toolkit for web developers and designers that greatly e
 
 ### **i) HTML Expansion**: Emmet allows us to quickly generate HTML code by using abbreviations.
 
-For instance, `div>ul>li.item$*3`
-
-```
-<div>
-    <ul>
-        <li class="item1"></li>
-        <li class="item2"></li>
-        <li class="item3"></li>
-    </ul>
-</div>
-```
+For instance,
+`html:5`- generates html5 boilerplate,
+`lorem`- generates lorem ipsum text,
+`lorem5`- generates 5 words of lorem ipsum text
 
 ### **ii) CSS Abbreviations**: Emmet also supports expanding CSS abbreviations
 
@@ -89,23 +82,13 @@ For instance, `ul>(li.item$*2>a{Item $})*3` would generate a list with nested it
 
 ## Q: Difference between a `Library and Framework`?
 
-A: A `Library` is a collection of pre-written code that provides specific functionalities or features. It is designed to be reused across different projects to save development time and effort.
-
-- **Control**: When using a library, the developer maintains more control over the overall structure and flow of the application. The developer decides when and how to use the library's components and functions.
-- **Usage**: Libraries are generally used to solve specific tasks or provide utilities. They are often "called" by the developer's code to perform specific actions or computations.
-- **Inversion of Control**: In a library, the developer controls the flow of the application. The library doesn't dictate the overall structure or architecture of the application.
-
-For instance, React.js is a JavaScript library developed by Facebook.
-React is primarily concerned with rendering UI components and managing their state and updates. It can be integrated into different project setups and combined with other libraries to create complete applications.
-
-A `Framework` is a structured, pre-designed architecture that provides a foundation for building an entire application. It dictates the overall structure, flow, and design patterns of the application.
-
-- **Control**: When using a framework, the developer gives up some control over the application's structure and flow. The framework enforces certain conventions and rules that the developer must follow.
-- **Usage**: Frameworks are used to build entire applications. They provide a foundation and a set of tools to handle various aspects of application development, such as routing, database interactions, user authentication, etc.
-- **Inversion of Control**: In a framework, control is often inverted, meaning the framework controls parts of the application's flow. Developers extend or customize the framework's components to build the application's logic.
-
-For instance, Angular is a front-end framework developed by Google.
-Angular is used for building dynamic and feature-rich web applications, particularly single-page applications (SPAs).
+A:
+| Feature | **`Library`** | **`Framework`** |
+|---|---|---|
+| **`Control`** | Developer has more control | Framework has more control |
+| **`Usage`** | Used for specific tasks or utilities | Used to build entire applications |
+| **`Inversion of Control`** | Developer controls flow | Framework controls parts of the flow |
+| **`Example`** | React.js | Angular |
 
 ## Q: What is `CDN`? Why do we `use` it?
 
@@ -128,31 +111,64 @@ A: When a web page includes resources from different domains, it can introduce s
 
 ## Q What is difference between `React and ReactDOM`?
 
-A: `React` is the core library of the React ecosystem. It is a JavaScript library for building user interfaces, focusing on creating reusable UI components and efficiently managing their state. React provides the tools and infrastructure to define components, handle their lifecycle, and manage state changes.
-
-`ReactDOM` is a package that provides the integration between React and the DOM (Document Object Model). It serves as the glue that allows React components to interact with the browser's DOM. ReactDOM is specifically designed for web applications, as it handles rendering React components to the HTML DOM. When you want to display React components in the browser, you need ReactDOM to take care of the rendering process. It provides methods like **`ReactDOM.render()`** to attach a React component to a specific HTML element in the DOM.
+A:
+| Feature | **`React`** | **`ReactDOM`** |
+|---|---|---|
+| **`Purpose`** | Core library for building UI components | Integration between React and DOM |
+| **`Functionality`** | Defines components, handles lifecycle, manages state | Renders React components to the DOM |
+| **`Key Method`** | - | ReactDOM.render() attach a React component to a specific HTML element in the DOM |
 
 ## Q What is difference between `react.development.js` and `react.production.js` files via CDN?
 
-A: `react.development.js`
-
-- This file is intended for development purposes. It contains the full and unminified version of the React library, including helpful warning messages and development-specific features.
-- It is larger in size compared to the production version since it includes additional information and code to aid developers in identifying potential issues during development and debugging.
-- When using **`react.development.js`**, developers get more descriptive error messages and warnings in the browser's console, making it easier to identify and address problems in the code.
-
-`react.production.js`
-
-- This file is intended for production deployment. It contains the minified and optimized version of the React library, stripped of any development-specific code, warnings, and console logs.
-- It is smaller in size compared to the development version, as all unnecessary code and debug information have been removed during the minification process.
-- Using **`react.production.js`** results in faster loading times and improved performance for end-users, as the minimized code is more efficient and consumes fewer resources.
-
-When deploying a React application to a production environment, it is best practice to use **`react.production.js`** (along with the corresponding **`react-dom.production.js`** file) from the CDN. This ensures that the application is delivered to users with a smaller and more optimized bundle, reducing the load time and improving overall performance.
-
-During development, developers may prefer to use **`react.development.js`** (and **`react-dom.development.js`**) to take advantage of the helpful error messages and development tools that assist in identifying and resolving issues during the development and testing phase. However, it's essential to switch to the production version before deploying the application to a live environment to achieve better performance and user experience.
+A:
+| Feature | **`react.development.js`** | **`react.production.js`** |
+|---|---|---|
+| **`Purpose`** | Development | Production |
+| **`Code`** | Full, unminified | Minified and optimized |
+| **`Size`** | Larger | Smaller |
+| **`Error Messages`** | Descriptive error messages and warnings | No error messages or warnings |
+| **`Performance`** | Slower | Faster |
+| **`Use Case`** | Development | Production |
 
 ## Q What is `async and defer`?
 
-A:
+A: Both are async way of loading a scripts
+| Feature | **`Defer`** | **`Async`** |
+|---|---|---|
+| **`Loading`** | In the background | In the background |
+| **`Execution Timing`** | After DOM is fully built (before DOMContentLoaded) | When the script is done loading |
+| **`Relationship with DOMContentLoaded`** | Waits for DOMContentLoaded | No guarantee, can happen before or after |
+| **`Script Execution Order`** | Order they appear in the document | Load-first order |
+| **`Use Cases`** | Scripts that need the whole DOM and/or their relative execution order is important | Independent scripts, like counters or ads, where relative execution order doesn't matter |
+
+```
+<p>...content before scripts...</p>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => alert("DOM ready after defer!"));
+</script>
+
+<script defer src="https://javascript.info/article/script-async-defer/long.js?speed=1"></script>
+<script defer src="https://javascript.info/article/script-async-defer/small.js"></script>
+
+<p>...content after scripts...</p>
+// same way test for async
+```
+
+**`Dynamic Scripts`** behave as “async” by default. This can be changed if we explicitly set script.async=false. Then scripts will be executed in the document order, just like defer.
+
+```
+function loadScript(src) {
+  let script = document.createElement('script');
+  script.src = src;
+  script.async = false;
+  document.body.append(script);
+}
+
+// long.js runs first because of async=false
+loadScript("/article/script-async-defer/long.js");
+loadScript("/article/script-async-defer/small.js");
+```
 
 ## References:
 
