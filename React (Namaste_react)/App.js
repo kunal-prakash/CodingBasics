@@ -1,3 +1,6 @@
+import React from "react";
+import ReactDOM from "react-dom/client";
+
 const heading = React.createElement(
   "div", //Which element is to be created?
   { id: "child1" }, //Setting attributes to the element created

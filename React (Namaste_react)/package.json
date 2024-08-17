@@ -1,0 +1,32 @@
+{
+  "name": "react-basics",
+  "version": "1.0.0",
+  "description": "React in depth",
+  "scripts": {
+    "start": "parcel index.html",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kunal-prakash/CodingBasics.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Kunal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kunal-prakash/CodingBasics/issues"
+  },
+  "homepage": "https://github.com/kunal-prakash/CodingBasics#readme",
+  "devDependencies": {
+    "parcel": "^2.12.0"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "browserslist": [
+    "last 2 versions > 1% not dead"
+  ]
+}
