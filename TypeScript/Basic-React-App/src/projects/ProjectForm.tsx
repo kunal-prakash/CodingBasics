@@ -1,14 +1,14 @@
 import { ChangeEvent, SyntheticEvent, useState } from "react";
 import { Project } from "./Project";
+import { useSaveProject } from "./projectHooks";
 
 interface ProjectFormProps {
   project: Project;
-  onSave: (project: Project) => void;
   onCancel: () => void;
 }
 
 export default function ProjectForm(props: ProjectFormProps) {
-  const { project: initialProject, onSave, onCancel } = props;
+  const { project: initialProject, onCancel } = props;
 
   const [project, setProject] = useState<Project>(initialProject);
   const [errors, setErrors] = useState({
@@ -17,10 +17,11 @@ export default function ProjectForm(props: ProjectFormProps) {
     budget: "",
   });
 
+  const { mutate: saveProject, isPending } = useSaveProject();
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
     if (!isValid) return;
-    onSave(project);
+    saveProject(project);
   };
 
   const handleChange = (
@@ -61,6 +62,7 @@ export default function ProjectForm(props: ProjectFormProps) {
 
   return (
     <form className="input-group vertical" onSubmit={handleSubmit}>
+      {isPending && <span className="toast">Saving...</span>}
       <label htmlFor="name">Project Name</label>
       <input
         type="text"
@@ -109,11 +111,11 @@ export default function ProjectForm(props: ProjectFormProps) {
   );
 }
 
-interface ErrorMsg {
+interface ErrorMsgProps {
   errorMsg: String;
 }
 
-const ErrorMessage = ({ errorMsg }: ErrorMsg) => {
+const ErrorMessage = ({ errorMsg }: ErrorMsgProps) => {
   return (
     <div className="card error">
       <p>{errorMsg}</p>

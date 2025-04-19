@@ -8,13 +8,17 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "api": "json-server api/db.json --port 4000"
+    "api": "json-server api/db.json --port 4000",
+    "deploy": "tsc -b && vite build && serve -s dist"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.74.4",
+    "@tanstack/react-query-devtools": "^5.74.4",
     "json-server": "^0.16.3",
     "mini.css": "^3.0.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router": "^7.5.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
