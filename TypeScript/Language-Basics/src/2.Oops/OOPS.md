@@ -92,6 +92,8 @@ class Ride {
 ```
 
 - `static` variables are shared among all instances.
+- `Access without instantiation`: You can access static variables using the ClassName.PropertyName syntax, without creating an object of the class first.
+- `Cannot use this (in instance methods)`: Instance methods use the this keyword to access instance properties, but they cannot directly access static properties with this. Conversely, static methods can access other static properties using this (which refers to the class constructor) or the class name.
 
 ---
 
@@ -115,6 +117,9 @@ class Student extends Person {
 }
 ```
 
+- `extends` Keyword: Used to establish the inheritance relationship between classes.
+- `super` Keyword: Used in the child class to access the parent class's members, primarily to call the parent's constructor (super()) or methods (super.methodName())
+  
 ---
 
 ## 7. Method Overriding
@@ -126,7 +131,10 @@ class Teacher extends Person {
   }
 }
 ```
-
+- allows a derived class to provide a specific implementation for a method that is already defined in its base class
+- `override` keyword, which explicitly indicates that a method is intended to override a base class method. This is considered a best practice as it improves code stability and helps catch potential errors at compile time.
+- You can override a method in a derived class in TypeScript without using the `override` keyword. 
+  
 ---
 
 ## 8. Polymorphism
@@ -201,13 +209,14 @@ class GoogleCalendar implements Calendar {
   }
 }
 ```
-
+- Syntactical contract that defines the shape of an object, including its properties and methods, but without providing implementation details
+  
 ---
 
 ## 13. Abstract Classes vs Interfaces
 
-| Feature                     | Abstract Class         | Interface             |
-|----------------------------|------------------------|------------------------|
+| Feature                    | Abstract Class         | Interface               |
+|----------------------------|------------------------|-------------------------|
 | Abstract Methods           | ✅                     | ✅                     |
 | Non-Abstract Methods       | ✅                     | ❌                     |
 | Protected Members          | ✅                     | ❌                     |
